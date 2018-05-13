@@ -1,8 +1,13 @@
-var vm = new Vue({
+var vm =  new Vue({
   el: '#app',
   data: {
     totalMoney: 0,
     productList: []
+  },
+  filters: {
+    formatMoney: function(value) {
+      return '¥' + value.toFixed(2);
+    }
   },
   mounted: function() {
     this.cartView();
