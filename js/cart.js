@@ -1,11 +1,11 @@
 new Vue({
     el: '#app',
     data: {
-        totalMoney: 0,
         productList: [],
         selectedProduct: [],
         checkAllFlag: false,
-        showModalFlag: false
+        showModalFlag: false,
+        currentProduct: ''
     },
     computed: {
         totalPrice: function() {
@@ -30,7 +30,6 @@ new Vue({
         cartView: function() {
             var _this = this;
             this.$http.get('data/cartData.json').then(function(res) {
-                _this.totalMoney = res.body.result.totalMoney;
                 _this.productList = res.body.result.list;
             });
         },
@@ -80,14 +79,17 @@ new Vue({
               this.selectedProduct = [];
             }
         },
-        showModal: function() {
+        showModal: function(item) {
           this.showModalFlag = true;
+          this.currentProduct = item;
         },
-        delProduct: function(item) {
-          if(item.checked) {
-            this.selectedProduct.splice(this.selectedProduct.indexOf(item), 1);
+        delProduct: function() {
+          var delObj = this.currentProduct;
+          if(delObj.checked) {
+            this.selectedProduct.splice(this.selectedProduct.indexOf(delObj), 1);
           }
-          this.productList.splice(this.productList.indexOf(item), 1);
+          this.productList.splice(this.productList.indexOf(delObj), 1);
+          this.showModalFlag = false;
         }
     }
 });
