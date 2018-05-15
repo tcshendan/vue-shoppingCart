@@ -4,7 +4,19 @@ new Vue({
         totalMoney: 0,
         productList: [],
         selectedProduct: [],
-        checkAllFlag: false
+        checkAllFlag: false,
+        showModalFlag: false
+    },
+    computed: {
+        totalPrice: function() {
+          var total = 0;
+          if(this.selectedProduct.length>0) {
+            this.selectedProduct.forEach(function(item, index) {
+              total += item.productPrice * item.productQuantity;
+            });
+          }
+          return total;
+        }
     },
     filters: {
         formatMoney: function(value) {
@@ -61,6 +73,21 @@ new Vue({
                     item.checked = _this.checkAllFlag;
                 }
             });
+            if(flag) {
+                this.selectedProduct = [];
+                this.selectedProduct = this.selectedProduct.concat(this.productList);
+            } else {
+              this.selectedProduct = [];
+            }
+        },
+        showModal: function() {
+          this.showModalFlag = true;
+        },
+        delProduct: function(item) {
+          if(item.checked) {
+            this.selectedProduct.splice(this.selectedProduct.indexOf(item), 1);
+          }
+          this.productList.splice(this.productList.indexOf(item), 1);
         }
     }
 });
