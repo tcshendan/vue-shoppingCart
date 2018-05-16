@@ -90,6 +90,13 @@ new Vue({
           }
           this.productList.splice(this.productList.indexOf(delObj), 1);
           this.showModalFlag = false;
+
+          var len = this.productList.length;
+          if (this.selectedProduct.length === len) {
+              this.checkAllFlag = true;
+          } else {
+              this.checkAllFlag = false;
+          }
         }
     }
 });
