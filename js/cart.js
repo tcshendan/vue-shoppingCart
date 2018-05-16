@@ -97,6 +97,11 @@ new Vue({
           } else {
               this.checkAllFlag = false;
           }
+        },
+        payment: function() {
+          if (this.totalPrice > 0) {
+            window.location.href = "address.html";
+          }
         }
     }
 });
