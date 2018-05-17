@@ -2,7 +2,8 @@ new Vue({
   el: '.container',
   data: {
     limitNumber: 3,
-    addressList: []
+    addressList: [],
+    currentIndex: 0
   },
   mounted: function() {
     this.$nextTick(function() {

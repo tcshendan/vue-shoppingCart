@@ -65,7 +65,7 @@
         <div class="addr-list-wrap">
           <div class="addr-list">
             <ul>
-              <li v-for="(item, index) in filterAddress">
+              <li v-for="(item, index) in filterAddress" :class="{'check': currentIndex==index}" @click="currentIndex=index">
                 <dl>
                   <dt>{{item.userName}}</dt>
                   <dd class="address">{{item.streetName}}</dd>
